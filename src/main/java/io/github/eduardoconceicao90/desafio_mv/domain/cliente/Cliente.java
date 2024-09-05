@@ -1,5 +1,7 @@
-package io.github.eduardoconceicao90.desafio_mv.domain;
+package io.github.eduardoconceicao90.desafio_mv.domain.cliente;
 
+import io.github.eduardoconceicao90.desafio_mv.domain.conta.Conta;
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.TipoCliente;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,15 +21,16 @@ public abstract class Cliente {
 
     protected String nome;
 
-    protected String tipoPessoa;
+    @Enumerated(EnumType.STRING)
+    protected TipoCliente tipoCliente;
 
     @OneToMany(mappedBy = "cliente", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Conta> contas = new ArrayList<>();
+    protected List<Conta> contas = new ArrayList<>();
 
     @Embedded
-    private Endereco endereco;
+    protected Endereco endereco;
 
     @OneToMany(mappedBy = "cliente", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Telefone> telefones = new ArrayList<>();
+    protected List<Telefone> telefones = new ArrayList<>();
 
 }

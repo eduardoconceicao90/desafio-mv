@@ -1,4 +1,4 @@
-package io.github.eduardoconceicao90.desafio_mv.domain;
+package io.github.eduardoconceicao90.desafio_mv.domain.cliente;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

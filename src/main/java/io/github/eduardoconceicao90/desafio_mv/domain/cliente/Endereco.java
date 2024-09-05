@@ -1,4 +1,4 @@
-package io.github.eduardoconceicao90.desafio_mv.domain;
+package io.github.eduardoconceicao90.desafio_mv.domain.cliente;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;
