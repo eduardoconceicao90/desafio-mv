@@ -21,7 +21,6 @@ public class ClienteDTO {
     private TipoCliente tipoCliente;
     private Endereco endereco;
 
-
     public ClienteDTO(Long id, String cpf, String cnpj) {
         this.id = id;
         this.cpf = cpf;
