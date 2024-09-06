@@ -54,7 +54,7 @@ public class ClienteService {
         return clienteRepository.save(pessoa);
     }
 
-    public PessoaFisica atualizarPessoaFisica(Long id, PessoaFisica pessoa) {
+    public PessoaFisica atualizarPessoaFisica(PessoaFisica pessoa, Long id) {
         pessoa.setId(id);
         PessoaFisica pessoaSalva = (PessoaFisica) findById(id);
 
@@ -70,7 +70,7 @@ public class ClienteService {
         return clienteRepository.save(pessoaSalva);
     }
 
-    public PessoaJuridica atualizarPessoaJuridica(Long id, PessoaJuridica pessoa) {
+    public PessoaJuridica atualizarPessoaJuridica(PessoaJuridica pessoa, Long id) {
         pessoa.setId(id);
         PessoaJuridica pessoaSalva = (PessoaJuridica) findById(id);
 
