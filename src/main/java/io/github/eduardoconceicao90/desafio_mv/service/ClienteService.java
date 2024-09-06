@@ -10,7 +10,6 @@ import io.github.eduardoconceicao90.desafio_mv.service.exception.ObjectNotFoundE
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,20 +34,18 @@ public class ClienteService {
     }
 
     public PessoaFisica cadastrarPessoaFisica(PessoaFisica pessoa) {
-        var cliente = new ClienteDTO();
-        cliente.setCpf(pessoa.getCpf());
-
+        var cliente = new ClienteDTO(null, pessoa.getCpf(), null);
         findByDocumento(cliente);
+
         pessoa.setTipoCliente(TipoCliente.PESSOA_FISICA);
 
         return clienteRepository.save(pessoa);
     }
 
     public PessoaJuridica cadastrarPessoaJuridica(PessoaJuridica pessoa) {
-        var cliente = new ClienteDTO();
-        cliente.setCnpj(pessoa.getCnpj());
-
+        var cliente = new ClienteDTO(null, null, pessoa.getCnpj());
         findByDocumento(cliente);
+
         pessoa.setTipoCliente(TipoCliente.PESSOA_JURIDICA);
 
         return clienteRepository.save(pessoa);
@@ -58,10 +55,7 @@ public class ClienteService {
         pessoa.setId(id);
         PessoaFisica pessoaSalva = (PessoaFisica) findById(id);
 
-        var cliente = new ClienteDTO();
-        cliente.setId(id);
-        cliente.setCpf(pessoaSalva.getCpf());
-
+        var cliente = new ClienteDTO(id, pessoaSalva.getCpf(), null);
         findByDocumento(cliente);
 
         mapper.getConfiguration().setSkipNullEnabled(true);
@@ -74,10 +68,7 @@ public class ClienteService {
         pessoa.setId(id);
         PessoaJuridica pessoaSalva = (PessoaJuridica) findById(id);
 
-        var cliente = new ClienteDTO();
-        cliente.setId(id);
-        cliente.setCnpj(pessoaSalva.getCnpj());
-
+        var cliente = new ClienteDTO(id, null, pessoaSalva.getCnpj());
         findByDocumento(cliente);
 
         mapper.getConfiguration().setSkipNullEnabled(true);
