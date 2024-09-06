@@ -26,11 +26,9 @@ public abstract class Cliente {
     protected Long id;
 
     @Column(name = "nome", length = 100)
-    @NotBlank(message = "{campo.nome.obrigatorio}")
     protected String nome;
 
     @Column(name = "telefone", length = 12)
-    @NotBlank(message = "{campo.telefone.obrigatorio}")
     protected String telefone;
 
     @Enumerated(EnumType.STRING)
@@ -39,8 +37,6 @@ public abstract class Cliente {
     @OneToMany(mappedBy = "cliente")
     protected List<Conta> contas = new ArrayList<>();
 
-    @NotNull(message = "{campo.endereco.obrigatorio}")
-    @Valid
     @Embedded
     protected Endereco endereco;
 

@@ -3,6 +3,7 @@ package io.github.eduardoconceicao90.desafio_mv.controller;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaFisica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaJuridica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.ClienteDTO;
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaFisicaDTO;
 import io.github.eduardoconceicao90.desafio_mv.service.ClienteService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -40,7 +41,7 @@ public class ClienteController {
     }
 
     @PostMapping(value = "/cadastrarPessoaFisica")
-    public ResponseEntity<PessoaFisica> cadastrarPessoaFisica(@Valid @RequestBody PessoaFisica pessoa) {
+    public ResponseEntity<PessoaFisicaDTO> cadastrarPessoaFisica(@Valid @RequestBody PessoaFisicaDTO pessoa) {
         var novaPessoa = clienteService.cadastrarPessoaFisica(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaPessoa.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -54,14 +55,14 @@ public class ClienteController {
     }
 
     @PutMapping(value = "/atualizarPessoaFisica/{id}")
-    public ResponseEntity<PessoaFisica> atualizarPessoaFisica(@Valid @RequestBody PessoaFisica pessoa, @PathVariable Long id) {
-        return ResponseEntity.ok().body(clienteService.atualizarPessoaFisica(pessoa, id));
+    public ResponseEntity<PessoaFisicaDTO> atualizarPessoaFisica(@RequestBody PessoaFisicaDTO pessoa, @PathVariable Long id) {
+        return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaFisica(pessoa, id), PessoaFisicaDTO.class));
     }
 
-    @PutMapping(value = "/atualizarPessoaJuridica/{id}")
-    public ResponseEntity<PessoaJuridica> atualizarPessoaJuridica(@Valid @RequestBody PessoaJuridica pessoa, @PathVariable Long id) {
-        return ResponseEntity.ok().body(clienteService.atualizarPessoaJuridica(pessoa, id));
-    }
+//    @PutMapping(value = "/atualizarPessoaJuridica/{id}")
+//    public ResponseEntity<PessoaJuridica> atualizarPessoaJuridica(@Valid @RequestBody PessoaJuridica pessoa, @PathVariable Long id) {
+//        return ResponseEntity.ok().body(clienteService.atualizarPessoaJuridica(pessoa, id));
+//    }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
