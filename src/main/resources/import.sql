@@ -1,1 +1,1 @@
-INSERT INTO usuario (id, senha, login) values (1, '$2a$12$iAQOwjFFvm9K2qvgD.GxveYEGVRmLoV.RUNcczvss/6PM45QbysMm', 'administrador');
+INSERT INTO usuario (id, senha, login) VALUES (1, '$2a$12$iAQOwjFFvm9K2qvgD.GxveYEGVRmLoV.RUNcczvss/6PM45QbysMm', 'administrador');

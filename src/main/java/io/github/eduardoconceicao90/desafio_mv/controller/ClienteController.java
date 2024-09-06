@@ -4,10 +4,12 @@ import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaFisica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaJuridica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.ClienteDTO;
 import io.github.eduardoconceicao90.desafio_mv.service.ClienteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/clientes")
+@SecurityRequirement(name = "bearer-key")
 public class ClienteController {
 
     @Autowired
