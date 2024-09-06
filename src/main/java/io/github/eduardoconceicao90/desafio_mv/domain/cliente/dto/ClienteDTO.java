@@ -2,6 +2,7 @@ package io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto;
 
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.Endereco;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.TipoCliente;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Hidden
 public class ClienteDTO {
 
     private Long id;

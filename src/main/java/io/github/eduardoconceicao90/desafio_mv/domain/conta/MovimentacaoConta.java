@@ -24,9 +24,12 @@ public class MovimentacaoConta {
 
     private BigDecimal movimentacaoCredito;
 
+    private BigDecimal taxaMovimentacao;
+
     private LocalDateTime dataMovimentacao;
 
     @ManyToOne
     @JoinColumn(name = "conta_id")
     private Conta conta;
+
 }
