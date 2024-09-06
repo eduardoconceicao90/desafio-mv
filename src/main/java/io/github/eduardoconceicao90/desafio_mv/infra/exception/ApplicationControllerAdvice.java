@@ -1,5 +1,6 @@
-package io.github.eduardoconceicao90.desafio_mv.exception;
+package io.github.eduardoconceicao90.desafio_mv.infra.exception;
 
+import io.github.eduardoconceicao90.desafio_mv.service.exception.ObjectNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -20,6 +21,13 @@ public class ApplicationControllerAdvice {
         List<String> errors = ex.getBindingResult().getAllErrors()
                 .stream().map(erro -> erro.getDefaultMessage()).collect(Collectors.toList());
         return new ApiErrors(errors);
+    }
+
+    @ExceptionHandler(ObjectNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ApiErrors handleObjectNotFound(ObjectNotFoundException ex){
+        String mensagemErro = ex.getMessage();
+        return new ApiErrors(mensagemErro);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)

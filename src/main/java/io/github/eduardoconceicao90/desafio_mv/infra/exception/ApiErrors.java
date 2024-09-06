@@ -1,4 +1,4 @@
-package io.github.eduardoconceicao90.desafio_mv.exception;
+package io.github.eduardoconceicao90.desafio_mv.infra.exception;
 
 import java.util.Arrays;
 import java.util.List;

@@ -21,16 +21,15 @@ public abstract class Cliente {
 
     protected String nome;
 
+    protected String telefone;
+
     @Enumerated(EnumType.STRING)
     protected TipoCliente tipoCliente;
 
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cliente")
     protected List<Conta> contas = new ArrayList<>();
 
     @Embedded
     protected Endereco endereco;
-
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    protected List<Telefone> telefones = new ArrayList<>();
 
 }

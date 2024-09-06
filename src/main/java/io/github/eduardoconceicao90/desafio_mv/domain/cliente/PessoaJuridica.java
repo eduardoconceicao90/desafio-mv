@@ -13,6 +13,6 @@ public class PessoaJuridica extends Cliente {
 
     @CNPJ
     @Column(unique = true)
-    private String cpf;
+    private String cnpj;
 
 }
