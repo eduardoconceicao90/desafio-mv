@@ -1,11 +1,18 @@
 package io.github.eduardoconceicao90.desafio_mv.controller;
 
+import io.github.eduardoconceicao90.desafio_mv.domain.conta.pessoaFisica.ContaPF;
+import io.github.eduardoconceicao90.desafio_mv.domain.conta.pessoaJuridica.ContaPJ;
+import io.github.eduardoconceicao90.desafio_mv.infra.exception.ApiException;
 import io.github.eduardoconceicao90.desafio_mv.service.ContaService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping(value = "/contas")
@@ -18,4 +25,27 @@ public class ContaController {
     @Autowired
     private ContaService contaService;
 
+    @GetMapping("/buscarContaPFPorId/{id}")
+    public ResponseEntity<ContaPF> buscarContaPFPorId(@PathVariable Long id) {
+        return ResponseEntity.ok().body(mapper.map(contaService.findContaPFById(id), ContaPF.class));
+    }
+
+    @GetMapping("/buscarContaPJPorId/{id}")
+    public ResponseEntity<ContaPJ> buscarContaPJPorId(@PathVariable Long id) {
+        return ResponseEntity.ok().body(mapper.map(contaService.findContaPJById(id), ContaPJ.class));
+    }
+
+    @PostMapping(value = "/cadastrarContaPF")
+    public ResponseEntity<ContaPF> cadastrarContaPF(@Valid @RequestBody ContaPF conta) throws ApiException {
+        var novaConta = contaService.cadastrarContaPF(conta);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaConta.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping(value = "/cadastrarContaPJ")
+    public ResponseEntity<ContaPJ> cadastrarContaPJ(@Valid @RequestBody ContaPJ conta) throws ApiException {
+        var novaConta = contaService.cadastrarContaPJ(conta);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaConta.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+    }
 }

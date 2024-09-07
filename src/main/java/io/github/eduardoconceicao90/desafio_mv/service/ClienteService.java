@@ -28,7 +28,7 @@ public class ClienteService {
 
     public Cliente findById(Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
-        return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id ));
+        return cliente.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado! Id: " + id ));
     }
 
     public List<Cliente> findAll() {
@@ -52,7 +52,6 @@ public class ClienteService {
     }
 
     public PessoaFisica atualizarPessoaFisica(PessoaFisicaDTO pessoa, Long id) {
-        pessoa.setId(id);
         PessoaFisica pessoaSalva = (PessoaFisica) findById(id);
 
         var cliente = new ClienteDTO(id, pessoaSalva.getCpf(), null);
@@ -65,7 +64,6 @@ public class ClienteService {
     }
 
     public PessoaJuridica atualizarPessoaJuridica(PessoaJuridicaDTO pessoa, Long id) {
-        pessoa.setId(id);
         PessoaJuridica pessoaSalva = (PessoaJuridica) findById(id);
 
         var cliente = new ClienteDTO(id, null, pessoaSalva.getCnpj());

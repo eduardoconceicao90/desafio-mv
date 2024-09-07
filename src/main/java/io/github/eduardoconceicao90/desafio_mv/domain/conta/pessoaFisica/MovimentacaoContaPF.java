@@ -1,4 +1,4 @@
-package io.github.eduardoconceicao90.desafio_mv.domain.conta;
+package io.github.eduardoconceicao90.desafio_mv.domain.conta.pessoaFisica;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -14,22 +13,22 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(of = "id")
 @Entity
-public class MovimentacaoConta {
+public class MovimentacaoContaPF {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private BigDecimal movimentacaoDebito;
+    private Double movimentacaoDebito;
 
-    private BigDecimal movimentacaoCredito;
+    private Double movimentacaoCredito;
 
-    private BigDecimal taxaMovimentacao;
+    private Double taxaMovimentacao;
 
     private LocalDateTime dataMovimentacao;
 
     @ManyToOne
     @JoinColumn(name = "conta_id")
-    private Conta conta;
+    private ContaPF conta;
 
 }

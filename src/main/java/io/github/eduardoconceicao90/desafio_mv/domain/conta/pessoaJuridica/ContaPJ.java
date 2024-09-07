@@ -1,0 +1,38 @@
+package io.github.eduardoconceicao90.desafio_mv.domain.conta.pessoaJuridica;
+
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaJuridica;
+import io.github.eduardoconceicao90.desafio_mv.domain.conta.enums.StatusConta;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@EqualsAndHashCode(of = "id")
+@Entity
+public class ContaPJ {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotNull(message = "{campo.saldo.obrigatorio}")
+    private Double saldo;
+
+    @Enumerated(EnumType.STRING)
+    protected StatusConta statusConta;
+
+    private LocalDate dataCadastro = LocalDate.now();
+
+    @NotNull(message = "{campo.cliente.obrigatorio}")
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private PessoaJuridica pessoaJuridica;
+
+}

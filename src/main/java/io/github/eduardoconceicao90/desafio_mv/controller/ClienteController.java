@@ -56,11 +56,13 @@ public class ClienteController {
 
     @PutMapping(value = "/atualizarPessoaFisica/{id}")
     public ResponseEntity<PessoaFisicaDTO> atualizarPessoaFisica(@Valid @RequestBody PessoaFisicaDTO pessoa, @PathVariable Long id) {
+        pessoa.setId(id);
         return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaFisica(pessoa, id), PessoaFisicaDTO.class));
     }
 
     @PutMapping(value = "/atualizarPessoaJuridica/{id}")
-    public ResponseEntity<PessoaJuridicaDTO> atualizarPessoaJuridica(@RequestBody PessoaJuridicaDTO pessoa, @PathVariable Long id) {
+    public ResponseEntity<PessoaJuridicaDTO> atualizarPessoaJuridica(@Valid @RequestBody PessoaJuridicaDTO pessoa, @PathVariable Long id) {
+        pessoa.setId(id);
         return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaJuridica(pessoa, id), PessoaJuridicaDTO.class));
     }
 
