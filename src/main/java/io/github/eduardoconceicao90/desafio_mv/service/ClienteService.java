@@ -4,10 +4,8 @@ import io.github.eduardoconceicao90.desafio_mv.domain.cliente.Cliente;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaFisica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaJuridica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.ClienteDTO;
-import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaFisicaDTO;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.TipoCliente;
 import io.github.eduardoconceicao90.desafio_mv.repository.ClienteRepository;
-import io.github.eduardoconceicao90.desafio_mv.repository.PessoaFisicaRepository;
 import io.github.eduardoconceicao90.desafio_mv.service.exception.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,25 +24,22 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
-    private PessoaFisicaRepository pessoaFisicaRepository;
-
-    public PessoaFisica findById(Long id) {
-        Optional<PessoaFisica> pessoaFisica = pessoaFisicaRepository.findById(id);
-        return pessoaFisica.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id ));
+    public Cliente findById(Long id) {
+        Optional<Cliente> cliente = clienteRepository.findById(id);
+        return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! Id: " + id ));
     }
 
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
     }
 
-    public PessoaFisica cadastrarPessoaFisica(PessoaFisicaDTO pessoa) {
+    public PessoaFisica cadastrarPessoaFisica(PessoaFisica pessoa) {
         var cliente = new ClienteDTO(null, pessoa.getCpf(), null);
         findByDocumento(cliente);
 
         pessoa.setTipoCliente(TipoCliente.PESSOA_FISICA);
 
-        return clienteRepository.save(mapper.map(pessoa, PessoaFisica.class));
+        return clienteRepository.save(pessoa);
     }
 
     public PessoaJuridica cadastrarPessoaJuridica(PessoaJuridica pessoa) {
@@ -56,28 +51,31 @@ public class ClienteService {
         return clienteRepository.save(pessoa);
     }
 
-    public PessoaFisica atualizarPessoaFisica(PessoaFisicaDTO pessoa, Long id) {
+    public PessoaFisica atualizarPessoaFisica(PessoaFisica pessoa, Long id) {
         pessoa.setId(id);
-        PessoaFisica pessoaSalva = findById(id);
+        PessoaFisica pessoaSalva = (PessoaFisica) findById(id);
 
         var cliente = new ClienteDTO(id, pessoaSalva.getCpf(), null);
         findByDocumento(cliente);
 
-        return clienteRepository.save(mapper.map(pessoa, PessoaFisica.class));
+        mapper.getConfiguration().setSkipNullEnabled(true);
+        mapper.map(pessoa, pessoaSalva);
+
+        return clienteRepository.save(pessoaSalva);
     }
 
-//    public PessoaJuridica atualizarPessoaJuridica(PessoaJuridica pessoa, Long id) {
-//        pessoa.setId(id);
-//        PessoaJuridica pessoaSalva = findById(id);
-//
-//        var cliente = new ClienteDTO(id, null, pessoaSalva.getCnpj());
-//        findByDocumento(cliente);
-//
-//        mapper.getConfiguration().setSkipNullEnabled(true);
-//        mapper.map(pessoa, pessoaSalva);
-//
-//        return clienteRepository.save(pessoaSalva);
-//    }
+    public PessoaJuridica atualizarPessoaJuridica(PessoaJuridica pessoa, Long id) {
+        pessoa.setId(id);
+        PessoaJuridica pessoaSalva = (PessoaJuridica) findById(id);
+
+        var cliente = new ClienteDTO(id, null, pessoaSalva.getCnpj());
+        findByDocumento(cliente);
+
+        mapper.getConfiguration().setSkipNullEnabled(true);
+        mapper.map(pessoa, pessoaSalva);
+
+        return clienteRepository.save(pessoaSalva);
+    }
 
     public void deletarCliente(Long id) {
         findById(id);
