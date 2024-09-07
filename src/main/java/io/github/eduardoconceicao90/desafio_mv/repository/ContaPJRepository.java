@@ -15,7 +15,7 @@ public interface ContaPJRepository extends JpaRepository<ContaPJ,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE ContaPJ SET status_conta = 'INATIVA' where cliente_id = ?2=1", nativeQuery = true)
+    @Query(value = "UPDATE ContaPJ SET status_conta = 'INATIVA' where cliente_id = ?1", nativeQuery = true)
     void inativarConta(Long id);
 
 }

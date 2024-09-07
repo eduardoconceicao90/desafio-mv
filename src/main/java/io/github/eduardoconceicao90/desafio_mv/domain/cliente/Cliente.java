@@ -1,5 +1,6 @@
 package io.github.eduardoconceicao90.desafio_mv.domain.cliente;
 
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.StatusCliente;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.TipoCliente;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
@@ -31,6 +32,9 @@ public abstract class Cliente {
 
     @Enumerated(EnumType.STRING)
     protected TipoCliente tipoCliente;
+
+    @Enumerated(EnumType.STRING)
+    protected StatusCliente statusCliente;
 
     @Valid
     @Embedded
