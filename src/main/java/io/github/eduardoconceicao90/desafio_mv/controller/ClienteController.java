@@ -3,6 +3,8 @@ package io.github.eduardoconceicao90.desafio_mv.controller;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaFisica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaJuridica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.ClienteDTO;
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaFisicaDTO;
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaJuridicaDTO;
 import io.github.eduardoconceicao90.desafio_mv.service.ClienteService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -53,13 +55,13 @@ public class ClienteController {
     }
 
     @PutMapping(value = "/atualizarPessoaFisica/{id}")
-    public ResponseEntity<PessoaFisica> atualizarPessoaFisica(@RequestBody PessoaFisica pessoa, @PathVariable Long id) {
-        return ResponseEntity.ok().body(clienteService.atualizarPessoaFisica(pessoa, id));
+    public ResponseEntity<PessoaFisicaDTO> atualizarPessoaFisica(@Valid @RequestBody PessoaFisicaDTO pessoa, @PathVariable Long id) {
+        return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaFisica(pessoa, id), PessoaFisicaDTO.class));
     }
 
     @PutMapping(value = "/atualizarPessoaJuridica/{id}")
-    public ResponseEntity<PessoaJuridica> atualizarPessoaJuridica(@RequestBody PessoaJuridica pessoa, @PathVariable Long id) {
-        return ResponseEntity.ok().body(clienteService.atualizarPessoaJuridica(pessoa, id));
+    public ResponseEntity<PessoaJuridicaDTO> atualizarPessoaJuridica(@RequestBody PessoaJuridicaDTO pessoa, @PathVariable Long id) {
+        return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaJuridica(pessoa, id), PessoaJuridicaDTO.class));
     }
 
     @DeleteMapping(value = "/{id}")

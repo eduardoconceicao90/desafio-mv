@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,6 +22,8 @@ public class Conta {
     private Long id;
 
     private BigDecimal saldo;
+
+    private LocalDateTime dataCadastro = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")

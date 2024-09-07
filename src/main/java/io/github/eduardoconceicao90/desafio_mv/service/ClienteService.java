@@ -4,6 +4,8 @@ import io.github.eduardoconceicao90.desafio_mv.domain.cliente.Cliente;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaFisica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaJuridica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.ClienteDTO;
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaFisicaDTO;
+import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaJuridicaDTO;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.TipoCliente;
 import io.github.eduardoconceicao90.desafio_mv.repository.ClienteRepository;
 import io.github.eduardoconceicao90.desafio_mv.service.exception.ObjectNotFoundException;
@@ -38,7 +40,6 @@ public class ClienteService {
         findByDocumento(cliente);
 
         pessoa.setTipoCliente(TipoCliente.PESSOA_FISICA);
-
         return clienteRepository.save(pessoa);
     }
 
@@ -47,11 +48,10 @@ public class ClienteService {
         findByDocumento(cliente);
 
         pessoa.setTipoCliente(TipoCliente.PESSOA_JURIDICA);
-
         return clienteRepository.save(pessoa);
     }
 
-    public PessoaFisica atualizarPessoaFisica(PessoaFisica pessoa, Long id) {
+    public PessoaFisica atualizarPessoaFisica(PessoaFisicaDTO pessoa, Long id) {
         pessoa.setId(id);
         PessoaFisica pessoaSalva = (PessoaFisica) findById(id);
 
@@ -64,7 +64,7 @@ public class ClienteService {
         return clienteRepository.save(pessoaSalva);
     }
 
-    public PessoaJuridica atualizarPessoaJuridica(PessoaJuridica pessoa, Long id) {
+    public PessoaJuridica atualizarPessoaJuridica(PessoaJuridicaDTO pessoa, Long id) {
         pessoa.setId(id);
         PessoaJuridica pessoaSalva = (PessoaJuridica) findById(id);
 

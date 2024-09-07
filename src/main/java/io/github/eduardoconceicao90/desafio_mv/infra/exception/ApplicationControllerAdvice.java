@@ -38,6 +38,14 @@ public class ApplicationControllerAdvice {
         return new ApiErrors(errors);
     }
 
+    @ExceptionHandler(ClassCastException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiErrors handleClassCastException(ClassCastException ex) {
+        String mensagemErro = "ID informado não pertence a este tipo cliente.";
+        List<String> errors = Arrays.asList(mensagemErro);
+        return new ApiErrors(errors);
+    }
+
     @ExceptionHandler(ApiException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrors handleExceptionJava(ApiException ex) {
@@ -45,5 +53,6 @@ public class ApplicationControllerAdvice {
         List<String> errors = Arrays.asList(mensagemErro);
         return new ApiErrors(errors);
     }
+
 
 }
