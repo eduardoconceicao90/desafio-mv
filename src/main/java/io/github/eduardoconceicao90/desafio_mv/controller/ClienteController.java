@@ -40,16 +40,11 @@ public class ClienteController {
         return ResponseEntity.ok().body(clientes);
     }
 
+    //----------------------- CLIENTE PESSOA FISICA:
+
     @PostMapping(value = "/cadastrarPessoaFisica")
     public ResponseEntity<PessoaFisica> cadastrarPessoaFisica(@Valid @RequestBody PessoaFisica pessoa) {
         var novaPessoa = clienteService.cadastrarPessoaFisica(pessoa);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaPessoa.getId()).toUri();
-        return ResponseEntity.created(uri).build();
-    }
-
-    @PostMapping(value = "/cadastrarPessoaJuridica")
-    public ResponseEntity<PessoaJuridica> cadastrarPessoaJuridica(@Valid @RequestBody PessoaJuridica pessoa) {
-        var novaPessoa = clienteService.cadastrarPessoaJuridica(pessoa);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaPessoa.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
@@ -58,6 +53,15 @@ public class ClienteController {
     public ResponseEntity<PessoaFisicaDTO> atualizarPessoaFisica(@Valid @RequestBody PessoaFisicaDTO pessoa, @PathVariable Long id) {
         pessoa.setId(id);
         return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaFisica(pessoa, id), PessoaFisicaDTO.class));
+    }
+
+    //----------------------- CLIENTE PESSOA JURIDICA:
+
+    @PostMapping(value = "/cadastrarPessoaJuridica")
+    public ResponseEntity<PessoaJuridica> cadastrarPessoaJuridica(@Valid @RequestBody PessoaJuridica pessoa) {
+        var novaPessoa = clienteService.cadastrarPessoaJuridica(pessoa);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaPessoa.getId()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 
     @PutMapping(value = "/atualizarPessoaJuridica/{id}")

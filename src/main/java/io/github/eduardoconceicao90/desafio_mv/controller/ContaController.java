@@ -25,14 +25,11 @@ public class ContaController {
     @Autowired
     private ContaService contaService;
 
+    //----------------------- CONTA PESSOA FISICA:
+
     @GetMapping("/buscarContaPFPorId/{id}")
     public ResponseEntity<ContaPF> buscarContaPFPorId(@PathVariable Long id) {
         return ResponseEntity.ok().body(mapper.map(contaService.findContaPFById(id), ContaPF.class));
-    }
-
-    @GetMapping("/buscarContaPJPorId/{id}")
-    public ResponseEntity<ContaPJ> buscarContaPJPorId(@PathVariable Long id) {
-        return ResponseEntity.ok().body(mapper.map(contaService.findContaPJById(id), ContaPJ.class));
     }
 
     @PostMapping(value = "/cadastrarContaPF")
@@ -42,10 +39,27 @@ public class ContaController {
         return ResponseEntity.created(uri).build();
     }
 
+    @PutMapping(value = "/inativarContaPF/{id}")
+    public void inativarContaPF(@PathVariable Long id){
+        contaService.inativarContaPF(id);
+    }
+
+    //----------------------- CONTA PESSOA JURIDICA:
+
+    @GetMapping("/buscarContaPJPorId/{id}")
+    public ResponseEntity<ContaPJ> buscarContaPJPorId(@PathVariable Long id) {
+        return ResponseEntity.ok().body(mapper.map(contaService.findContaPJById(id), ContaPJ.class));
+    }
+
     @PostMapping(value = "/cadastrarContaPJ")
     public ResponseEntity<ContaPJ> cadastrarContaPJ(@Valid @RequestBody ContaPJ conta) throws ApiException {
         var novaConta = contaService.cadastrarContaPJ(conta);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(novaConta.getId()).toUri();
         return ResponseEntity.created(uri).build();
+    }
+
+    @PutMapping(value = "/inativarContaPJ/{id}")
+    public void inativarContaPJ(@PathVariable Long id){
+        contaService.inativarContaPJ(id);
     }
 }

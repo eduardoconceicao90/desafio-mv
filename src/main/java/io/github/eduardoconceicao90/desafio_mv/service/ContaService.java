@@ -25,13 +25,10 @@ public class ContaService {
     @Autowired
     private ContaPJRepository contaPJRepository;
 
+    //----------------------- CONTA PESSOA FISICA:
+
     public ContaPF findContaPFById(Long id) {
         Optional<ContaPF> conta = contaPFRepository.findById(id);
-        return conta.orElseThrow(() -> new ObjectNotFoundException("Conta não encontrada! Id: " + id ));
-    }
-
-    public ContaPJ findContaPJById(Long id) {
-        Optional<ContaPJ> conta = contaPJRepository.findById(id);
         return conta.orElseThrow(() -> new ObjectNotFoundException("Conta não encontrada! Id: " + id ));
     }
 
@@ -53,6 +50,17 @@ public class ContaService {
          }
     }
 
+    public void inativarContaPF(Long id){
+        contaPFRepository.inativarConta(id);
+    }
+
+    //----------------------- CONTA PESSOA JURIDICA:
+
+    public ContaPJ findContaPJById(Long id) {
+        Optional<ContaPJ> conta = contaPJRepository.findById(id);
+        return conta.orElseThrow(() -> new ObjectNotFoundException("Conta não encontrada! Id: " + id ));
+    }
+
     public ContaPJ cadastrarContaPJ(ContaPJ conta) throws ApiException {
         Cliente cliente = clienteService.findById(conta.getPessoaJuridica().getId());
 
@@ -69,6 +77,10 @@ public class ContaService {
         }else {
             throw new ApiException("Cliente não é PESSOA JURÍDICA.");
         }
+    }
+
+    public void inativarContaPJ(Long id){
+        contaPJRepository.inativarConta(id);
     }
 
 }

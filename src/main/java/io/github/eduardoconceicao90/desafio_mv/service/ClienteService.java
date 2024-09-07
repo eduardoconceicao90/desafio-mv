@@ -35,19 +35,13 @@ public class ClienteService {
         return clienteRepository.findAll();
     }
 
+    //----------------------- CLIENTE PESSOA FISICA:
+
     public PessoaFisica cadastrarPessoaFisica(PessoaFisica pessoa) {
         var cliente = new ClienteDTO(null, pessoa.getCpf(), null);
         findByDocumento(cliente);
 
         pessoa.setTipoCliente(TipoCliente.PESSOA_FISICA);
-        return clienteRepository.save(pessoa);
-    }
-
-    public PessoaJuridica cadastrarPessoaJuridica(PessoaJuridica pessoa) {
-        var cliente = new ClienteDTO(null, null, pessoa.getCnpj());
-        findByDocumento(cliente);
-
-        pessoa.setTipoCliente(TipoCliente.PESSOA_JURIDICA);
         return clienteRepository.save(pessoa);
     }
 
@@ -61,6 +55,16 @@ public class ClienteService {
         mapper.map(pessoa, pessoaSalva);
 
         return clienteRepository.save(pessoaSalva);
+    }
+
+    //----------------------- CLIENTE PESSOA JURIDICA:
+
+    public PessoaJuridica cadastrarPessoaJuridica(PessoaJuridica pessoa) {
+        var cliente = new ClienteDTO(null, null, pessoa.getCnpj());
+        findByDocumento(cliente);
+
+        pessoa.setTipoCliente(TipoCliente.PESSOA_JURIDICA);
+        return clienteRepository.save(pessoa);
     }
 
     public PessoaJuridica atualizarPessoaJuridica(PessoaJuridicaDTO pessoa, Long id) {
