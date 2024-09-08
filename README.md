@@ -5,7 +5,7 @@ Projeto desafio MV.
 ## Tecnologias Utilizadas
 
 - Java 17.
-- Spring Boot.
+- Spring Boot 3.x.
 - Spring Security.
 - JWT (JSON Web Tokens).
 - Swagger.
