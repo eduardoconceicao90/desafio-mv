@@ -72,4 +72,13 @@ public class ContaController {
     public void ativarContaPJ(@PathVariable Long id){
         contaService.ativarContaPJ(id);
     }
+
+    @PostMapping(value = "/transferirSaldo")
+    public void transferirSaldo(@RequestParam(value = "valor") Double valor,
+                                @RequestParam(value = "clienteIdDebito") Long clienteIdDebito,
+                                @RequestParam(value = "contaIdDebito") Long contaIdDebito,
+                                @RequestParam(value = "clienteIdCredito") Long clienteIdCredito,
+                                @RequestParam(value = "contaIdCredito") Long contaIdCredito) throws ApiException {
+        contaService.transferirSaldo(valor, clienteIdDebito, contaIdDebito, clienteIdCredito, contaIdCredito);
+    }
 }

@@ -18,4 +18,24 @@ public interface ContaPFRepository extends JpaRepository<ContaPF,Long> {
     @Query(value = "UPDATE ContaPF SET status_conta = ?1 WHERE cliente_id = ?2", nativeQuery = true)
     void alterarStatusConta(String status, Long id);
 
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE ContaPF SET qtd_movimentacao_debito = qtd_movimentacao_debito + 1 WHERE cliente_id = ?1", nativeQuery = true)
+    void adicionarMovimentacaoDebito(Long cliente_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE ContaPF SET saldo = saldo - ?1 WHERE cliente_id = ?2", nativeQuery = true)
+    void removerSaldoConta(Double valor, Long cliente_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE ContaPF SET qtd_movimentacao_credito = qtd_movimentacao_credito + 1 WHERE cliente_id = ?1", nativeQuery = true)
+    void adicionarMovimentacaoCredito(Long cliente_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE ContaPF SET saldo = saldo + ?1 WHERE cliente_id = ?2", nativeQuery = true)
+    void adicionarSaldoConta(Double valor, Long cliente_id);
+
 }

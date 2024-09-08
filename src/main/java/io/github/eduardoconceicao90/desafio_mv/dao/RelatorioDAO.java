@@ -39,6 +39,30 @@ public class RelatorioDAO {
 
             saldo.setEndereco(endereco);
 
+            if(rs.getString("QTD_MOVIMENTACAO_DEBITO_PF") != null) {
+                saldo.setQtdMovimentacaoDebito(rs.getLong("QTD_MOVIMENTACAO_DEBITO_PF"));
+            }else if(rs.getString("QTD_MOVIMENTACAO_DEBITO_PJ") != null) {
+                saldo.setQtdMovimentacaoDebito(rs.getLong("QTD_MOVIMENTACAO_DEBITO_PJ"));
+            }
+
+            if(rs.getString("QTD_MOVIMENTACAO_CREDITO_PF") != null) {
+                saldo.setQtdMovimentacaoCredito(rs.getLong("QTD_MOVIMENTACAO_CREDITO_PF"));
+            }else if(rs.getString("QTD_MOVIMENTACAO_CREDITO_PJ") != null) {
+                saldo.setQtdMovimentacaoCredito(rs.getLong("QTD_MOVIMENTACAO_CREDITO_PJ"));
+            }
+
+            if(rs.getString("TOTAL_MOVIMENTACAO_PF") != null) {
+                saldo.setTotalMovimentacao(rs.getLong("TOTAL_MOVIMENTACAO_PF"));
+            }else if(rs.getString("TOTAL_MOVIMENTACAO_PJ") != null) {
+                saldo.setTotalMovimentacao(rs.getLong("TOTAL_MOVIMENTACAO_PJ"));
+            }
+
+            if(rs.getString("SALDO_INICIAL_PF") != null) {
+                saldo.setSaldoInicial(rs.getDouble("SALDO_INICIAL_PF"));
+            }else if(rs.getString("SALDO_INICIAL_PJ") != null) {
+                saldo.setSaldoInicial(rs.getDouble("SALDO_INICIAL_PJ"));
+            }
+
             return saldo;
 
         }, id);

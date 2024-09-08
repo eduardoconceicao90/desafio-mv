@@ -1,5 +1,6 @@
 package io.github.eduardoconceicao90.desafio_mv.domain.conta.pessoaJuridica;
 
+import io.github.eduardoconceicao90.desafio_mv.domain.conta.enums.TipoMovimentacao;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,9 +20,10 @@ public class MovimentacaoContaPJ {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double valorMovimentacaoDebito;
+    private Double valorMovimentacao;
 
-    private Double valorMovimentacaoCredito;
+    @Enumerated(EnumType.STRING)
+    protected TipoMovimentacao tipoMovimentacao;
 
     private Double taxaMovimentacao;
 
