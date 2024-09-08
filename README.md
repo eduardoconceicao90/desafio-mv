@@ -1,6 +1,6 @@
 ## Visão Geral
 
-O projeto focado em uma arquitetura de microsserviços utilizando tecnologias modernas e práticas avançadas de desenvolvimento.
+Projeto desafio MV.
 
 ## Tecnologias Utilizadas
 
@@ -18,3 +18,23 @@ O projeto focado em uma arquitetura de microsserviços utilizando tecnologias mo
 - Cadastramento de contas fisíca ou jurídica.
 - Geração de relatório.
 - Serviço para movimentação financeira entre contas.
+
+## Teste de persistência no banco H2:
+
+![image](https://github.com/user-attachments/assets/4a162c97-b2a4-4e5e-bfe1-117ffb0d42a7)
+![image](https://github.com/user-attachments/assets/b352f53b-f03d-4aed-ba4b-fa967fe0b655)
+
+## Teste de persistência no banco Oracle:
+
+![image](https://github.com/user-attachments/assets/20565fef-4b53-4b59-99b4-c21fddd7d736)
+![image](https://github.com/user-attachments/assets/6e70c989-96fa-451c-a621-76b31f978f70)
+
+## Swagger:
+http://localhost:8085/swagger-ui/index.html
+  
+![image](https://github.com/user-attachments/assets/48550f13-c236-4983-8391-8883774b845b)
+
+
+
+  
+
