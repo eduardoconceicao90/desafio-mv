@@ -28,4 +28,30 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long> {
     @Query(value = "UPDATE Cliente SET status_cliente = ?1 where id = ?2", nativeQuery = true)
     void alterarStatusCliente(String status, Long id);
 
+    String consultaSaldoCliente = """
+                        SELECT
+                            CLI.NOME,
+                            CLI.TIPO_CLIENTE,
+                            CLI.DATA_CADASTRO,
+                            CLI.LOGRADOURO,
+                            CLI.NUMERO,
+                            CLI.COMPLEMENTO,
+                            CLI.BAIRRO,
+                            CLI.CIDADE,
+                            CLI.CEP,
+                            CLI.UF,
+                            PF.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_DEBITO_PF,
+                            PF.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_CREDITO_PF,
+                            PJ.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_DEBITO_PJ,
+                            PJ.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_CREDITO_PJ,
+                            PF.QTD_MOVIMENTACAO_DEBITO + PF.QTD_MOVIMENTACAO_CREDITO TOTAL_MOVIMENTACAO_PF,
+                            PJ.QTD_MOVIMENTACAO_DEBITO + PJ.QTD_MOVIMENTACAO_CREDITO TOTAL_MOVIMENTACAO_PJ,
+                            PF.SALDO SALDO_INICIAL_PF,
+                            PJ.SALDO SALDO_INICIAL_PJ
+                        FROM CLIENTE CLI
+                        LEFT JOIN CONTAPF PF ON PF.CLIENTE_ID = CLI.ID
+                        LEFT JOIN CONTAPJ PJ ON PJ.CLIENTE_ID = CLI.ID
+                        WHERE CLI.ID = ?
+                    """;
+
 }

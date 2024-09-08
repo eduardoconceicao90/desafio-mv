@@ -28,7 +28,9 @@ public class ContaPJ {
     @Enumerated(EnumType.STRING)
     protected StatusConta statusConta;
 
-    private Long quantidadeMovimentacao;
+    private Long qtdMovimentacaoDebito = (long) 0;
+
+    private Long qtdMovimentacaoCredito = (long) 0;
 
     private LocalDate dataCadastro = LocalDate.now();
 

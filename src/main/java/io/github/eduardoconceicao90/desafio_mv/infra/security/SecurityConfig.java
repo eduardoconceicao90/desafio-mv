@@ -26,7 +26,8 @@ public class SecurityConfig {
             "/h2-console/**",
             "/login",
             "/clientes/**",
-            "/contas/**"
+            "/contas/**",
+            "/relatorios/**"
     };
 
     @Autowired

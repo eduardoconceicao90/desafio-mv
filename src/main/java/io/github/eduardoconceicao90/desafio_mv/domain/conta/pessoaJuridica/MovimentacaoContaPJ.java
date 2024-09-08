@@ -19,9 +19,9 @@ public class MovimentacaoContaPJ {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Double movimentacaoDebito;
+    private Double valorMovimentacaoDebito;
 
-    private Double movimentacaoCredito;
+    private Double valorMovimentacaoCredito;
 
     private Double taxaMovimentacao;
 
