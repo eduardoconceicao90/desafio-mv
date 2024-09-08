@@ -24,7 +24,9 @@ public class SecurityConfig {
 
     private static final String[] PUBLIC_MATCHERS = {
             "/h2-console/**",
-            "/login"
+            "/login",
+            "/clientes/**",
+            "/contas/**"
     };
 
     @Autowired

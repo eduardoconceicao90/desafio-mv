@@ -25,7 +25,7 @@ public class ContaController {
     @Autowired
     private ContaService contaService;
 
-    //----------------------- CONTA PESSOA FISICA:
+    //------------------------------------------ CONTA PESSOA FISICA:
 
     @GetMapping("/buscarContaPFPorId/{id}")
     public ResponseEntity<ContaPF> buscarContaPFPorId(@PathVariable Long id) {
@@ -44,7 +44,12 @@ public class ContaController {
         contaService.inativarContaPF(id);
     }
 
-    //----------------------- CONTA PESSOA JURIDICA:
+    @PutMapping(value = "/ativarContaPF/{id}")
+    public void ativarContaPF(@PathVariable Long id){
+        contaService.ativarContaPF(id);
+    }
+
+    //------------------------------------------ CONTA PESSOA JURIDICA:
 
     @GetMapping("/buscarContaPJPorId/{id}")
     public ResponseEntity<ContaPJ> buscarContaPJPorId(@PathVariable Long id) {
@@ -61,5 +66,10 @@ public class ContaController {
     @PutMapping(value = "/inativarContaPJ/{id}")
     public void inativarContaPJ(@PathVariable Long id){
         contaService.inativarContaPJ(id);
+    }
+
+    @PutMapping(value = "/ativarContaPJ/{id}")
+    public void ativarContaPJ(@PathVariable Long id){
+        contaService.ativarContaPJ(id);
     }
 }

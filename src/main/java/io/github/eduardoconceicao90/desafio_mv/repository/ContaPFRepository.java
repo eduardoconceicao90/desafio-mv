@@ -15,7 +15,7 @@ public interface ContaPFRepository extends JpaRepository<ContaPF,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE ContaPF SET status_conta = 'INATIVA' WHERE cliente_id = ?1", nativeQuery = true)
-    void inativarConta(Long id);
+    @Query(value = "UPDATE ContaPF SET status_conta = ?1 WHERE cliente_id = ?2", nativeQuery = true)
+    void alterarStatusConta(String status, Long id);
 
 }

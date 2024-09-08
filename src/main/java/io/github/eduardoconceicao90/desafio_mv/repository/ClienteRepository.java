@@ -20,9 +20,12 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long> {
     @Query("SELECT p FROM PessoaJuridica p WHERE p.cnpj =:cnpj")
     Optional<PessoaJuridica> findByCnpj(String cnpj);
 
+    @Query(value = "SELECT status_cliente FROM Cliente WHERE id = ?1", nativeQuery = true)
+    String statusCliente(Long id);
+
     @Transactional
     @Modifying
-    @Query(value = "UPDATE Cliente SET status_cliente = 'INATIVO' where id = ?1", nativeQuery = true)
-    void inativarCliente(Long id);
+    @Query(value = "UPDATE Cliente SET status_cliente = ?1 where id = ?2", nativeQuery = true)
+    void alterarStatusCliente(String status, Long id);
 
 }

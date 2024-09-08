@@ -90,6 +90,8 @@ public class ClienteService {
         return clienteRepository.save(pessoaSalva);
     }
 
+    //------------------------------------------
+
     public void deletarOuInativarCliente(Long id) {
        Cliente cliente = findById(id);
 
@@ -98,7 +100,7 @@ public class ClienteService {
             String statusConta = contaPFRepository.statusConta(cliente.getId());
 
             if(statusConta != null){
-                clienteRepository.inativarCliente(id);
+                clienteRepository.alterarStatusCliente(StatusCliente.INATIVO.toString(), id);
             }else {
                 clienteRepository.deleteById(id);
             }
@@ -108,7 +110,7 @@ public class ClienteService {
             String statusConta = contaPJRepository.statusConta(cliente.getId());
 
             if (statusConta != null) {
-                clienteRepository.inativarCliente(id);
+                clienteRepository.alterarStatusCliente(StatusCliente.INATIVO.toString(), id);
             }else {
                 clienteRepository.deleteById(id);
             }
@@ -117,6 +119,9 @@ public class ClienteService {
 
     }
 
+    public void ativarCliente(Long id){
+        clienteRepository.alterarStatusCliente(StatusCliente.ATIVO.toString(), id);
+    }
 
     //------------------------------------------
 

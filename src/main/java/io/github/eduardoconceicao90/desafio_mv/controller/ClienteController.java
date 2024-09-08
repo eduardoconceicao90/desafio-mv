@@ -40,7 +40,7 @@ public class ClienteController {
         return ResponseEntity.ok().body(clientes);
     }
 
-    //----------------------- CLIENTE PESSOA FISICA:
+    //------------------------------------------ CLIENTE PESSOA FISICA:
 
     @PostMapping(value = "/cadastrarPessoaFisica")
     public ResponseEntity<PessoaFisica> cadastrarPessoaFisica(@Valid @RequestBody PessoaFisica pessoa) {
@@ -55,7 +55,7 @@ public class ClienteController {
         return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaFisica(pessoa, id), PessoaFisicaDTO.class));
     }
 
-    //----------------------- CLIENTE PESSOA JURIDICA:
+    //------------------------------------------ CLIENTE PESSOA JURIDICA:
 
     @PostMapping(value = "/cadastrarPessoaJuridica")
     public ResponseEntity<PessoaJuridica> cadastrarPessoaJuridica(@Valid @RequestBody PessoaJuridica pessoa) {
@@ -70,10 +70,17 @@ public class ClienteController {
         return ResponseEntity.ok().body(mapper.map(clienteService.atualizarPessoaJuridica(pessoa, id), PessoaJuridicaDTO.class));
     }
 
+    //------------------------------------------
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletarOuInativarCliente(@PathVariable Long id) {
         clienteService.deletarOuInativarCliente(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/ativarCliente/{id}")
+    public void ativarCliente(@PathVariable Long id){
+        clienteService.ativarCliente(id);
     }
 
 }

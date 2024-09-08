@@ -28,6 +28,8 @@ public class ContaPF {
     @Enumerated(EnumType.STRING)
     protected StatusConta statusConta;
 
+    private Long quantidadeMovimentacao;
+
     private LocalDate dataCadastro = LocalDate.now();
 
     @NotNull(message = "{campo.cliente.obrigatorio}")

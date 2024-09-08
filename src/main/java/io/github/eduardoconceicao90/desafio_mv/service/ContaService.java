@@ -5,6 +5,7 @@ import io.github.eduardoconceicao90.desafio_mv.domain.conta.enums.StatusConta;
 import io.github.eduardoconceicao90.desafio_mv.domain.conta.pessoaFisica.ContaPF;
 import io.github.eduardoconceicao90.desafio_mv.domain.conta.pessoaJuridica.ContaPJ;
 import io.github.eduardoconceicao90.desafio_mv.infra.exception.ApiException;
+import io.github.eduardoconceicao90.desafio_mv.repository.ClienteRepository;
 import io.github.eduardoconceicao90.desafio_mv.repository.ContaPFRepository;
 import io.github.eduardoconceicao90.desafio_mv.repository.ContaPJRepository;
 import io.github.eduardoconceicao90.desafio_mv.service.exception.ObjectNotFoundException;
@@ -17,13 +18,16 @@ import java.util.Optional;
 public class ContaService {
 
     @Autowired
-    private ClienteService clienteService;
-
-    @Autowired
     private ContaPFRepository contaPFRepository;
 
     @Autowired
     private ContaPJRepository contaPJRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
+
+    @Autowired
+    private ClienteService clienteService;
 
     //----------------------- CONTA PESSOA FISICA:
 
@@ -33,25 +37,30 @@ public class ContaService {
     }
 
     public ContaPF cadastrarContaPF(ContaPF conta) throws ApiException {
-         Cliente cliente = clienteService.findById(conta.getPessoaFisica().getId());
+        Cliente cliente = clienteService.findById(conta.getPessoaFisica().getId());
+        validarStatusCliente(cliente.getId());
 
-         if(cliente.getTipoCliente().name().equals("PESSOA_FISICA")){
-             String statusConta = contaPFRepository.statusConta(cliente.getId());
+        if(cliente.getTipoCliente().name().equals("PESSOA_FISICA")){
+            String statusConta = contaPFRepository.statusConta(cliente.getId());
 
-             if(statusConta == null || !statusConta.equals("ATIVA")){
-                 conta.setStatusConta(StatusConta.ATIVA);
-                 return contaPFRepository.save(conta);
-             } else {
-                 throw new ApiException("Cliente já possui uma conta ativa.");
-             }
+            if(statusConta == null || !statusConta.equals("ATIVA")){
+                conta.setStatusConta(StatusConta.ATIVA);
+                return contaPFRepository.save(conta);
+            }else {
+                throw new ApiException("Cliente já possui uma conta ativa.");
+            }
 
-         }else {
-             throw new ApiException("Cliente não é PESSOA FÍSICA.");
-         }
+        }else {
+            throw new ApiException("Cliente não é PESSOA FÍSICA.");
+        }
     }
 
     public void inativarContaPF(Long id){
-        contaPFRepository.inativarConta(id);
+        contaPFRepository.alterarStatusConta(StatusConta.INATIVA.toString(), id);
+    }
+
+    public void ativarContaPF(Long id){
+        contaPFRepository.alterarStatusConta(StatusConta.ATIVA.toString(), id);
     }
 
     //----------------------- CONTA PESSOA JURIDICA:
@@ -63,6 +72,7 @@ public class ContaService {
 
     public ContaPJ cadastrarContaPJ(ContaPJ conta) throws ApiException {
         Cliente cliente = clienteService.findById(conta.getPessoaJuridica().getId());
+        validarStatusCliente(cliente.getId());
 
         if(cliente.getTipoCliente().name().equals("PESSOA_JURIDICA")){
             String statusConta = contaPJRepository.statusConta(cliente.getId());
@@ -80,7 +90,23 @@ public class ContaService {
     }
 
     public void inativarContaPJ(Long id){
-        contaPJRepository.inativarConta(id);
+        contaPJRepository.alterarStatusConta(StatusConta.INATIVA.toString(), id);
+    }
+
+    public void ativarContaPJ(Long id){
+        contaPJRepository.alterarStatusConta(StatusConta.ATIVA.toString(), id);
+    }
+
+    //------------------------------------------
+
+    private void validarStatusCliente(Long id) throws ApiException {
+        String status = clienteRepository.statusCliente(id);
+
+        if(status.equals("ATIVO")){
+            return;
+        }
+
+        throw new ApiException("Cliente está inativo.");
     }
 
 }
