@@ -2,6 +2,8 @@
 
 Projeto desafio MV.
 
+
+
 ## Tecnologias Utilizadas
 
 - Java 17.
@@ -19,6 +21,12 @@ Projeto desafio MV.
 - Geração de relatório.
 - Serviço para movimentação financeira entre contas.
 
+## Dados para geração do access_token:
+- login: administrador
+- senha: 123
+
+*OBS.: Para facilitar uso da API deixei todos os end-points como publico.
+
 ## Teste de persistência no banco H2:
 
 ![image](https://github.com/user-attachments/assets/4a162c97-b2a4-4e5e-bfe1-117ffb0d42a7)
@@ -33,8 +41,3 @@ Projeto desafio MV.
 http://localhost:8085/swagger-ui/index.html
   
 ![image](https://github.com/user-attachments/assets/48550f13-c236-4983-8391-8883774b845b)
-
-
-
-  
-
