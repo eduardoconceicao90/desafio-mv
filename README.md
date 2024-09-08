@@ -2,8 +2,6 @@
 
 Projeto desafio MV.
 
-
-
 ## Tecnologias Utilizadas
 
 - Java 17.
@@ -22,6 +20,7 @@ Projeto desafio MV.
 - Serviço para movimentação financeira entre contas.
 
 ## Dados para geração do access_token:
+
 - login: administrador
 - senha: 123
 
