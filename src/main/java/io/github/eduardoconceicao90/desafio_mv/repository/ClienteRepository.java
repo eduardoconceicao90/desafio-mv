@@ -41,13 +41,19 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long> {
                             CLI.CEP,
                             CLI.UF,
                             PF.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_DEBITO_PF,
-                            PF.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_CREDITO_PF,
+                            PF.QTD_MOVIMENTACAO_CREDITO QTD_MOVIMENTACAO_CREDITO_PF,
                             PJ.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_DEBITO_PJ,
-                            PJ.QTD_MOVIMENTACAO_DEBITO QTD_MOVIMENTACAO_CREDITO_PJ,
+                            PJ.QTD_MOVIMENTACAO_CREDITO QTD_MOVIMENTACAO_CREDITO_PJ,
                             PF.QTD_MOVIMENTACAO_DEBITO + PF.QTD_MOVIMENTACAO_CREDITO TOTAL_MOVIMENTACAO_PF,
                             PJ.QTD_MOVIMENTACAO_DEBITO + PJ.QTD_MOVIMENTACAO_CREDITO TOTAL_MOVIMENTACAO_PJ,
-                            PF.SALDO SALDO_INICIAL_PF,
-                            PJ.SALDO SALDO_INICIAL_PJ
+                            PF.SALDO SALDO_PF,
+                            PJ.SALDO SALDO_PJ,
+                            (SELECT SUM(MPJ.TAXA_MOVIMENTACAO)
+                             FROM MOVIMENTACAO_CONTAPJ MPJ
+                             WHERE MPJ.CONTA_ID = PJ.ID) AS TAXA_MOVIMENTACAO_PJ,
+                            (SELECT SUM(MPF.TAXA_MOVIMENTACAO)
+                             FROM MOVIMENTACAO_CONTAPF MPF
+                             WHERE MPF.CONTA_ID = PF.ID) AS TAXA_MOVIMENTACAO_PF
                         FROM CLIENTE CLI
                         LEFT JOIN CONTAPF PF ON PF.CLIENTE_ID = CLI.ID
                         LEFT JOIN CONTAPJ PJ ON PJ.CLIENTE_ID = CLI.ID

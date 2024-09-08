@@ -57,10 +57,16 @@ public class RelatorioDAO {
                 saldo.setTotalMovimentacao(rs.getLong("TOTAL_MOVIMENTACAO_PJ"));
             }
 
-            if(rs.getString("SALDO_INICIAL_PF") != null) {
-                saldo.setSaldoInicial(rs.getDouble("SALDO_INICIAL_PF"));
-            }else if(rs.getString("SALDO_INICIAL_PJ") != null) {
-                saldo.setSaldoInicial(rs.getDouble("SALDO_INICIAL_PJ"));
+            if(rs.getString("SALDO_PF") != null) {
+                saldo.setSaldo(rs.getDouble("SALDO_PF"));
+            }else if(rs.getString("SALDO_PJ") != null) {
+                saldo.setSaldo(rs.getDouble("SALDO_PJ"));
+            }
+
+            if(rs.getString("TAXA_MOVIMENTACAO_PF") != null) {
+                saldo.setValorPagoMovimentacao(rs.getDouble("TAXA_MOVIMENTACAO_PF"));
+            }else if(rs.getString("TAXA_MOVIMENTACAO_PJ") != null) {
+                saldo.setValorPagoMovimentacao(rs.getDouble("TAXA_MOVIMENTACAO_PJ"));
             }
 
             return saldo;

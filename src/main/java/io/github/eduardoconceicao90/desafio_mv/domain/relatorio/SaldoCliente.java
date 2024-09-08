@@ -15,7 +15,7 @@ public class SaldoCliente {
     private Long qtdMovimentacaoDebito;
     private Long qtdMovimentacaoCredito;
     private Long totalMovimentacao;
-    private Double saldoInicial;
-    private Double saldoAtual;
+    private Double valorPagoMovimentacao;
+    private Double saldo;
 
 }
