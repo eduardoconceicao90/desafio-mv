@@ -8,6 +8,7 @@ API REST - Projeto desafio MV.
 - Spring Boot 3.x.
 - Spring Security.
 - JWT (JSON Web Tokens).
+- Lombok.
 - Swagger.
 - Postman.
 
