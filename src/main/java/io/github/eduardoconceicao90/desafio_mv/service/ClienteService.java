@@ -1,6 +1,5 @@
 package io.github.eduardoconceicao90.desafio_mv.service;
 
-import io.github.eduardoconceicao90.desafio_mv.dao.RelatorioDAO;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.Cliente;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaFisica;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.PessoaJuridica;
@@ -9,7 +8,6 @@ import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaFisicaDT
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.dto.PessoaJuridicaDTO;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.StatusCliente;
 import io.github.eduardoconceicao90.desafio_mv.domain.cliente.enums.TipoCliente;
-import io.github.eduardoconceicao90.desafio_mv.domain.relatorio.SaldoCliente;
 import io.github.eduardoconceicao90.desafio_mv.repository.ClienteRepository;
 import io.github.eduardoconceicao90.desafio_mv.repository.ContaPFRepository;
 import io.github.eduardoconceicao90.desafio_mv.repository.ContaPJRepository;
