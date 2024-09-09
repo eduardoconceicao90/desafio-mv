@@ -24,7 +24,11 @@ Projeto desafio MV.
 - login: administrador
 - senha: 123
 
+  token_type: Bearer
+
 *OBS.: Para facilitar uso da API deixei todos os end-points como publico.
+
+![image](https://github.com/user-attachments/assets/0c089760-1636-459e-8524-94595275efb2)
 
 ## Teste de persistência no banco H2:
 
