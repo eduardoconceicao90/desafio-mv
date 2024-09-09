@@ -1,6 +1,6 @@
 ## Visão Geral
 
-Projeto desafio MV.
+API REST - Projeto desafio MV.
 
 ## Tecnologias Utilizadas
 
@@ -26,11 +26,12 @@ Projeto desafio MV.
 
   token_type: Bearer
 
-*OBS.: Para facilitar uso da API deixei todos os end-points como publico.
+*OBS.: Para facilitar uso da API, deixei todos os end-points como publico.
 
 ![image](https://github.com/user-attachments/assets/0c089760-1636-459e-8524-94595275efb2)
 
 ## Teste de persistência no banco H2:
+http://localhost:8085/h2-console
 
 ![image](https://github.com/user-attachments/assets/4a162c97-b2a4-4e5e-bfe1-117ffb0d42a7)
 ![image](https://github.com/user-attachments/assets/b352f53b-f03d-4aed-ba4b-fa967fe0b655)
